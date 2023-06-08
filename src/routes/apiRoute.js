@@ -12,7 +12,8 @@ router.get("/products", getProducts);
 router.post("/products", insertProductDetails);
 router.post("/register", generateToken);
 router.get("/authentication", authenticate, (req, res) => {
-	res.json({ ok: true });
+	const user = req.user;
+	res.json({ ok: true, message: "Authenticated!", user });
 });
 
 module.exports = router;
