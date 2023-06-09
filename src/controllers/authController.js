@@ -1,6 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const { hashPassword } = require("../helpers/passHasing");
 
 exports.generateToken = async (req, res) => {
 	try {
@@ -26,7 +27,7 @@ exports.generateToken = async (req, res) => {
 			//this userDetails is giving the create Data back
 			name,
 			email,
-			password,
+			password: await hashPassword(password),
 		}).save();
 
 		const token = jwt.sign(
@@ -34,7 +35,7 @@ exports.generateToken = async (req, res) => {
 			process.env.SECRET_KEY,
 			{ expiresIn: "1h" }
 		);
-		res.json({ token });
+		res.json({ token, UserDetails });
 	} catch (error) {
 		res.json(err.message);
 	}
