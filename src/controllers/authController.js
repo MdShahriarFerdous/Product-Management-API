@@ -5,7 +5,7 @@ const { hashPassword } = require("../helpers/passHasing");
 
 exports.generateToken = async (req, res) => {
 	try {
-		const { name, email, password } = req.body;
+		const { name, email, password, role } = req.body;
 
 		if (!name.trim()) {
 			return res.json({ error: "Name is required" });
@@ -28,10 +28,11 @@ exports.generateToken = async (req, res) => {
 			name,
 			email,
 			password: await hashPassword(password),
+			role,
 		}).save();
 
 		const token = jwt.sign(
-			{ userId: UserDetails._id }, //because we are getting the insert data back
+			{ _id: UserDetails._id }, //because we are getting the insert data back
 			process.env.SECRET_KEY,
 			{ expiresIn: "1h" }
 		);

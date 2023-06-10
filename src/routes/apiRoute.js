@@ -6,14 +6,27 @@ const {
 } = require("../controllers/productController");
 
 const { generateToken } = require("../controllers/authController");
-const { authenticate } = require("../middlewares/authMiddleware");
+const {viewAllUsers} = require("../controllers/userController");
+const { authenticate, isAdmin } = require("../middlewares/authMiddleware");
 
-router.get("/products", getProducts);
-router.post("/products", insertProductDetails);
+//simple get products, need no admin check
+// router.get("/products", getProducts);
+
+//admin check get products, this route can only access by admin
+router.get("/products",authenticate, isAdmin, getProducts);
+
+//token generate
 router.post("/register", generateToken);
-router.get("/authentication", authenticate, (req, res) => {
-	const user = req.user;
+
+//Insert product details
+router.post("/products",  insertProductDetails);
+
+//Authenticate route
+router.get("/authentication", authenticate, (req, res) => { 
+	const user = req.headers.auth;
 	res.json({ ok: true, message: "Authenticated!", user });
 });
+//this route can only access by admin
+router.get("/user-check", authenticate, isAdmin, viewAllUsers);
 
 module.exports = router;
