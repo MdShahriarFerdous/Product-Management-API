@@ -10,7 +10,7 @@ get ==> "/product" route will check if the user is registered or not + admin or 
 (2) **When a user wii insert a product details they must have to be authenticate (Not mentioned in assignment)
 router.post("/products", authenticate, insertProductDetails);
 
-              -------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 ### Core Features
 
