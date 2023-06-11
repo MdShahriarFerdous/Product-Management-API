@@ -38,6 +38,6 @@ exports.generateToken = async (req, res) => {
 		);
 		res.json({ token, UserDetails });
 	} catch (error) {
-		res.json(err.message);
+		res.json(error.message);
 	}
 };

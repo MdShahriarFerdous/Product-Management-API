@@ -30,5 +30,5 @@ exports.hashPassword = (password) => {
 }
 
 exports.comparePassword = (password, hashed) => {
-    return bcrypt.compare(password, hshed);
+    return bcrypt.compare(password, hashed);
 }
