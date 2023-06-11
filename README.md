@@ -9,3 +9,16 @@ get ==> "/product" route will check if the user is registered or not + admin or 
 
 (2) **When a user wii insert a product details they must have to be authenticate (Not mentioned in assignment)
 router.post("/products", authenticate, insertProductDetails);
+
+              -------------------------------------------------------------------------------------------------------
+
+### Core Features
+
+---
+
+- JSON Web Token authorization and authentication✅
+- Hashing password by Bcrypt✅
+- Registered user can Insert product details [ router.post("/products", authenticate, insertProductDetails) ]✅
+- Admin can view all products  [ router.get("/products", authenticate, isAdmin, getProducts) ]✅
+- Admin can check all users   [ router.get("/user-check", authenticate, isAdmin, viewAllUsers)  ]✅
+- Generate token route by JSON Web Token [ router.post("/register", generateToken) ]✅
